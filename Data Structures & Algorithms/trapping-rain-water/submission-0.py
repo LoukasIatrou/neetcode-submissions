@@ -1,0 +1,27 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)
+        if n == 0:
+            return 0
+
+        left, right = 0, n - 1
+        left_max, right_max = height[left], height[right]
+        water = 0
+
+        # Invariant: all trapped water between [0, left-1] and [right+1, n-1] is already counted.
+        while left < right:
+            if left_max <= right_max:
+                # We move left pointer
+                left += 1
+                left_max = max(left_max, height[left])
+                water += max(0, left_max - height[left])
+            else:
+ 
+                right -= 1
+                right_max = max(right_max, height[right])
+                water += max(0, right_max - height[right])
+
+        return water
+
+
+
