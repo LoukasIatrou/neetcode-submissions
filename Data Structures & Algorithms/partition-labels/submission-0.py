@@ -1,0 +1,16 @@
+class Solution:
+    def partitionLabels(self, s: str) -> List[int]:
+        lastIdx = {}
+        for i, c in enumerate(s):
+            lastIdx[c] = i
+        res = []
+        end, size = 0, 0
+        for i,c in enumerate(s):
+            size +=1 
+            if lastIdx[c]>end:
+                end = lastIdx[c]
+            if end<=i:
+                res.append(size)
+                size = 0
+        return res 
+
